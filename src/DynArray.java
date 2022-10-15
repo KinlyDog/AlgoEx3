@@ -39,8 +39,8 @@ public class DynArray<T> {
     public T getItem(int index) {
         exception(index);
 
-        if (array[index] != null) {
-            return array[index];
+        if (this.array[index] != null) {
+            return this.array[index];
         }
 
         return null;
@@ -49,49 +49,49 @@ public class DynArray<T> {
     public void append(T itm) {
         capacityTest();
 
-        array[count++] = itm;
+        this.array[this.count++] = itm;
     }
 
     public void insert(T itm, int index) {
-        if (index < 0 || index > count) {
+        if (index < 0 || index > this.count) {
             throw new ArrayIndexOutOfBoundsException("Index Out Of Bound");
         }
 
         capacityTest();
 
-        if (index == count) {
+        if (index == this.count) {
             append(itm);
             return;
         }
 
-        System.arraycopy(array, index, array, index + 1, count++ - index);
-        array[index] = itm;
+        System.arraycopy(this.array, index, this.array, index + 1, this.count++ - index);
+        this.array[index] = itm;
     }
 
     public void remove(int index) {
         exception(index);
 
-        if (index == count - 1) {
-            array[--count] = null;
+        if (index == this.count - 1) {
+            this.array[--this.count] = null;
         } else {
 
-            System.arraycopy(array, index + 1, array, index, --count - index);
-            array[count] = null;
+            System.arraycopy(this.array, index + 1, this.array, index, --this.count - index);
+            this.array[this.count] = null;
         }
 
-        if (capacity > 16 && count < (capacity / 2)) {
-            makeArray((int)(capacity / 1.5));
+        if (this.capacity > 16 && this.count < (this.capacity / 2)) {
+            makeArray((int)(this.capacity / 1.5));
         }
     }
 
     public void capacityTest() {
-        if (count >= capacity) {
-            makeArray(capacity * 2);
+        if (this.count >= this.capacity) {
+            makeArray(this.capacity * 2);
         }
     }
 
     public void exception(int index) {
-        if (index < 0 || index >= count) {
+        if (index < 0 || index >= this.count) {
             throw new ArrayIndexOutOfBoundsException("Index Out Of Bound");
         }
     }
