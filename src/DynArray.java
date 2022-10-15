@@ -17,16 +17,11 @@ public class DynArray<T> {
             new_capacity = 16;
         }
 
-        if (this.count == 0) {
-            this.array = (T[]) Array.newInstance(this.clazz, new_capacity);
-            this.capacity = new_capacity;
-
-            return;
-        }
-
         T[] tmp = this.array;
         this.array = (T[]) Array.newInstance(this.clazz, new_capacity);
         this.capacity = new_capacity;
+
+        if (this.count == 0) return;
 
         int n = this.capacity;
         if (tmp.length < this.capacity) {
