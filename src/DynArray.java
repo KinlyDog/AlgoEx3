@@ -13,15 +13,15 @@ public class DynArray<T> {
     }
 
     public void makeArray(int new_capacity) {
+        if (new_capacity < 16) {
+            new_capacity = 16;
+        }
+
         if (this.count == 0) {
             this.array = (T[]) Array.newInstance(this.clazz, new_capacity);
             this.capacity = new_capacity;
 
             return;
-        }
-
-        if (new_capacity < 16) {
-            new_capacity = 16;
         }
 
         T[] tmp = this.array;
